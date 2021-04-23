@@ -3,19 +3,68 @@
     box-sizing: border-box;
 }
 
+
+header {
+    background-color: #725E54;
+    color: white;
+    font-family: "Orelega One", normal;
+    height: 100vh;
+    text-align: center;
+    justify-content: center;
+    
+
+}
+
 body {
     margin: 0px;
-    font-family: Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
+    background-color: #DEE5E5;
 }
+
 header, section {
     padding: 20px;
 }
+
 p, li {
     line-height: 1.5em;
 }
 
 #inspiration {
-    background-color: #F0F0F0;
+    background-color: #DEE5E5;
     padding-top: 40px;
     padding-bottom: 40px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+    " a a a "
+    " b c d";
+    text-align: center; 
+
+}
+
+#about {
+    background-color: white;
+    grid-area: a;
+    height: auto;
+    padding-left: 200px;
+    padding-right: 200px;
+    font-size: 1.1em;
+    line-height: 100%;
+    text-align: left;
+}
+
+#tutorials {
+    grid-area: b ;
+}
+
+#homework {
+    grid-area: c ;
+}
+
+#inspiration {
+    grid-area: d ;
 }
