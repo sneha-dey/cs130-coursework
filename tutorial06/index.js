@@ -92,15 +92,17 @@ const tracks = [
 // track in the list?
 const track = tracks[5];
 
-let i=1
+let i=0 /*counter ..arrays start at 0!*/
 for (const track of tracks){
   const template = `
-        <div data-index="${i}" onclick="playSong(event);">
-            <img src="${track.image_url}" />
+        <div data-index="${i}" onclick="playSong(event);"> 
+          <img src="${track.image_url}" />
             <h2>${track.name}</h2>
-        </div>`;
+        </div>`;  
+         /* sets data-index to 1*/
+         /* when you click, signals function playSong */
   document.querySelector('main').innerHTML += template;
-  i += 1 ;
+  i += 1 ; /* increases the data-index each time*/
 }
   
 
@@ -116,10 +118,10 @@ for (const track of tracks){
 
 
 const playSong = ev => {
-  console.log(ev.currentTarget.dataset.index);
-  const idx = Number(ev.currentTarget.dataset.index);
-  const currentTrack = tracks[idx];
-  console.log(currentTrack.preview_url);
+  console.log(ev.currentTarget.dataset.index); /* console.log = printing */ /* ev.currentTarget = what was clicked on */ /* grabs dataset-index */
+  const idx = Number(ev.currentTarget.dataset.index); /* creates a variable called idx .. transforms data type into a number*/
+  const currentTrack = tracks[idx]; /* grabs index of array..the item */
+  console.log(currentTrack.preview_url); /* taking item and printing preview URL*/
   document.querySelector('#audio-source').src = currentTrack.preview_url;
   
   const audio = document.querySelector('audio');
