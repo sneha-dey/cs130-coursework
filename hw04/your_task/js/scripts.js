@@ -16,7 +16,27 @@ const search = (ev) => {
     }
 }
 
+const playTrack = (ev) => {
+   // console.log(ev.currentTarget)
+    const elem = ev.currentTarget;
+    const previewURL = elem.dataset.previewTrack;
+    console.log(previewURL)
+
+    if (previewURL) {
+         audioPlayer.setAudioFile(previewURL)
+         audioPlayer.play()
+    } else {
+        console.log('there is no preview available')}
+
+    document.querySelector('footer .track-item').innerHTML = elem.innerHTML;
+
+    };
+
+
+
+
 const getTracks = (term) => {
+    document.querySelector('#tracks').innerHTML=``;
     console.log(`
         get tracks from spotify based on the search term
         "${term}" and load them into the #tracks section 
@@ -27,11 +47,16 @@ const getTracks = (term) => {
         .then(data => displayTracks(data));
 };
 
-const getAlbums = (term) => {
+ const getAlbums = (term) => {
+    document.querySelector('#albums').innerHTML=``;
     console.log(`
         get albums from spotify based on the search term
         "${term}" and load them into the #albums section 
         of the DOM...`);
+    url = baseURL + "?type=album&q=" + term;
+    fetch (url)
+        .then(response => response.json())
+        .then(data => displayAlbums(data));
 };
 
 const getArtist = (term) => {
@@ -59,7 +84,7 @@ const displayTracks = (foundtracks) => {
     } else {
         const lentracks = foundtracks.length;
         for (t = 0; t < Math.min(5,lentracks);t++){
-            template = `<section class="track-item preview" data-preview-track="${foundtracks[t].preview_url}">
+            template = `<section class="track-item preview" data-preview-track="${foundtracks[t].preview_url}" onclick="playTrack(event);">
                             <img src="${foundtracks[t].album.image_url}">
                             <i class="fas play-track fa-play" aria-hidden="true"></i>
                             <div class="label">
@@ -91,3 +116,29 @@ const displayArtist = (art) => {
         document.querySelector('#artist').innerHTML = template;
         }
     }
+
+
+const displayAlbums = (foundalbum) => {
+    if (foundalbum[0] == null){
+         document.querySelector("#albums").innerHTML = "no albums found";
+
+    } else {
+        console.log(foundalbum)
+        const lenalbums= foundalbum.length;
+        for (a = 0; a < lenalbums;a++){
+        template = `<section class="album-card" id="${foundalbum[a].id}">
+                    <div>
+                         <img src="${foundalbum[a].image_url}">
+                        <h3>${foundalbum[a].name}</h3>
+                        <div class="footer">
+                            <a href="${foundalbum[a].spotify_url}" target="_blank">
+                                view on spotify
+                            </a>
+                        </div>
+                    </div>
+                </section>`;
+    document.querySelector('#albums').innerHTML += template;  }
+        }
+    }
+
+
