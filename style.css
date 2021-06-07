@@ -38,10 +38,11 @@ p, li {
 main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas:
     " a a a "
-    " b c d";
+    " b c d"
+    " e e e ";
     text-align: center; 
 
 }
@@ -67,4 +68,12 @@ main {
 
 #inspiration {
     grid-area: d ;
+}
+
+#final {
+    grid-area: e ;
+    background-color: #DEE5E5;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    text-align: center;
 }
