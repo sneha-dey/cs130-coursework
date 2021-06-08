@@ -72,7 +72,7 @@ main {
 
 #final {
     grid-area: e ;
-    background-color: #DEE5E5;
+    background-color: white;
     padding-top: 40px;
     padding-bottom: 40px;
     text-align: center;
